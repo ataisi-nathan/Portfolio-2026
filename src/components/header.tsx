@@ -3,6 +3,9 @@ import profile from '../assets/profile-image.png'
 const Header = () => {
     return (
         <header>
+            <div className="logo mobile">
+                AN
+            </div>
             <div className="profile">
                 <img src={profile} alt="Profile Picture" />
                 <div className="profile-detail">

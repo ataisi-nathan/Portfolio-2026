@@ -6,7 +6,8 @@
   --background-color: #f0efef;
   --backgroundSecond-color: #a8a3a3;
   --text-color: #07043b;
-  --font-family: "lato", sans-serif;
+  --font-family: "Montserrat", sans-serif;
+  --white-color: #fff;
 }
 
 * {
@@ -14,11 +15,12 @@
   padding: 0;
   box-sizing: border-box;
   font-family: var(--font-family);
-  color: var(--text-color)
+  color: var(--text-color);
 }
 
 body {
   overflow-y: hidden;
+  background-color: var(--background-color);
 }
 
 .App {
@@ -28,12 +30,20 @@ body {
   overflow: hidden;
 }
 
+.mobile {
+  visibility: hidden;
+}
+
+.mobile-nav {
+  display: none;
+}
+
 .sidebar {
   display: flex;
   flex-direction: column;
   align-items: start;
   height: calc(100vh - 1em);
-  background-color: var(--background-color);
+  background-color: var(--white-color);
   color: var(--text-color);
   padding: 1rem;
   text-align: center;
@@ -89,17 +99,19 @@ body {
 
 /* Header style */
 header {
-  background-color: var(--background-color);
+  background-color: var(--white-color);
   border-radius: 5px;
   padding: 10px;
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   align-items: center;
   gap: 1em;
   height: 4em;
+  
 }
 header .profile {
   display: flex;
+  justify-content: end;
   gap: .5em;
   align-items: center;
 }
@@ -120,12 +132,13 @@ header .profile img {
 
 /* Hero section */
 .hero {
-  background-color: var(--background-color);
+  background-color: var(--white-color);
   margin-top: 10px;
   padding: 20px;
   border-radius: 5px;
   height: calc(100vh - 5.6em);
   overflow-y: scroll;
+  border: 5px solid white;
 }
 
 /* Charts */
@@ -141,7 +154,7 @@ header .profile img {
 .chart {
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.678);
+  background-color: var(--background-color);
   border-radius: 7px;
   margin: 20px;
   padding: 10px;
@@ -150,8 +163,8 @@ header .profile img {
   transition: 650ms ease-out;
 }
 .chart:hover {
-  background-color: var(--background-color);
-  border: 3px solid white;
+  background-color: var(--backgroundSecond-color-color);
+  border: 3px solid var(--text-color);
   color: white;
 }
 .chart h3 {
@@ -210,7 +223,7 @@ header .profile img {
 
 }
 .chart .skills .icon {
-  font-size: 1.3em;
+  font-size: 1em;
   margin: .5em;
 }
 .chart .skill-text {
@@ -227,7 +240,7 @@ header .profile img {
   font-size: 1.2em;
 }
 .card {
-  background-color: white;
+  background-color: var(--background-color);
   height: 200px;
   width: 180px;
   text-align: center;
@@ -250,6 +263,7 @@ header .profile img {
 /* Contact Page */
 .contact {
   padding: 20px;
+
 }
 .contact h2 {
   font-size: 2em;
@@ -271,16 +285,18 @@ header .profile img {
   padding: 5px;
   font-size: 1.4em;
   color: var(--text-color);
-  border: none;
+  border: 2px solid var(--text-color);
   border-radius: 3px;
+  background-color: var(--background-color);
 }
 .form-input textarea {
   width: 100%;
   height: 15em;
-  border: none;
+  border: 2px solid var(--text-color);
   padding: 10px;
   font-size: 1.4em;
   border-radius: 5px;
+  background-color: var(--background-color);
 }
 .contact-container button {
   padding: 10px;
@@ -296,7 +312,7 @@ header .profile img {
   gap: 100px;
 }
 .socials .card {
-  background-color: #ffffff;
+  background-color: var(--background-color);
   padding: 20px;
   height: 150px;
   border-radius: 5px;
@@ -343,4 +359,114 @@ header .profile img {
   display: flex;
   gap: 100px;
   font-weight: 700;
+}
+
+/* Mobile Responsiveness */
+
+@media screen and (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+  header {
+    padding: 5px 20px;
+    width: calc(100vw - 30px);
+  }
+  .hero {
+    width: calc(100vw - 30px);
+    padding-bottom: 50px;
+  }
+  .App {
+    width: 100vw;
+    padding-bottom: 150px;
+  }
+  .mobile {
+    visibility: visible;
+  }
+  .mobile-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    background-color: var(--white-color);
+    height: 3em;
+    width: 100%;
+    font-size: 1.4em;
+  }
+  .logo {
+    width: fit-content;
+  }
+  .charts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, fit-content);
+    padding: 10px;
+  }
+  .chart {
+    margin: 0;
+  }
+  .three {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .four {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  .five {
+    grid-row: 3;
+    grid-column: 1/3;
+  }
+  .six {
+    grid-row: 4;
+    grid-column: 1/3;
+  }
+
+  /* Skill Page */
+  .skills-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 1em;
+    padding: 20px 0;
+    font-size: 1em;
+  }
+  .card {
+    background-color: var(--background-color);
+    /* height: 130px;
+    width: 130px; */
+    text-align: center;
+    border-radius: 7px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 250ms ease-out;
+  }
+
+  /* Contact Page */
+  .socials {
+    grid-template-columns: repeat(2, 49%);
+    gap: 20px;
+  }
+  .socials .card {
+    background-color: var(--background-color);
+    padding: 5px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: space-around;
+    text-decoration: none;
+    font-size: .8em;
+  }
+  .socials .card .icon{
+    font-size: 3em;
+  }
+  .contact-container {
+    width: 100%;
+    margin: 0;
+    padding: 20px 0;
+  }
 }

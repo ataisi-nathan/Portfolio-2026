@@ -1,6 +1,7 @@
 // import Header from "./components/header"
 import Container from "./components/container"
 import Sidebar from "./components/Sidebar"
+import MobileNav from "./components/MobileNav"
 
 function App() {
 
@@ -9,6 +10,7 @@ function App() {
         {/* <Header /> */}
         <Sidebar />
         <Container />
+        <MobileNav />
     </div>
   )
 }
