@@ -1,15 +1,38 @@
 import { FaFacebookF, FaGithub, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
-import React, {useRef} from 'react'
-// import emailjs from '@emailjs/browser';
+import { type FormEvent, useRef, useState } from 'react'
+import emailjs from '@emailjs/browser';
+import Alert from "../components/alert";
 
 const Contact = () => {
-    const form = useRef();
+    const form = useRef<HTMLFormElement | null>(null);
+    const [isSent, setIsSent] = useState<string>("");
 
-    const sendEmail = (e) => {
+    const sendEmail = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        emailjs
-            .sendForm('Y')
+        if (!form.current) {
+            return;
+        }
+
+        emailjs.sendForm(
+            import.meta.env.VITE_EMAILJS_SERVICE_ID,
+            import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+            form.current,
+            import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+        )
+        .then((_result) => {
+        // Resets the form after successful submission
+            form.current?.reset();
+
+            setIsSent("Message sent successfully!");
+            <div className="alert-container">
+                <Alert message={isSent} type="success" />
+            </div>
+        },
+        (_error) => {
+            setIsSent("Message not sent, please try again.");
+            <Alert message={isSent} type="error" />
+        });
     }
     return (
         <div className="contact hero">
@@ -57,6 +80,7 @@ const Contact = () => {
                     <button type="submit">Send Message</button>
                 </form>
             </div>
+            
         </div>
     )
 }

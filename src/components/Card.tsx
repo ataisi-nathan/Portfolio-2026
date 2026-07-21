@@ -2,7 +2,7 @@ import type React from "react";
 
 type CardProps = {
     title: string;
-    description: null;
+    description: null | React.ReactNode;
 }
 
 const Card: React.FC<CardProps> = ({ title, description}) => {
